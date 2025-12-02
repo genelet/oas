@@ -2,6 +2,8 @@
 
 Go packages for parsing, manipulating, and validating OpenAPI 3.0 and 3.1 specifications.
 
+[![GoDoc](https://godoc.org/github.com/genelet/oas?status.svg)](https://godoc.org/github.com/genelet/oas)
+
 ## Overview
 
 This repository provides two Go packages for working with OpenAPI specifications:
