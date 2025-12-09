@@ -1,0 +1,197 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Schema Types Example",
+    "version": "1.0.0"
+  },
+  "host": "api.example.com",
+  "basePath": "/",
+  "paths": {},
+  "definitions": {
+    "StringTypes": {
+      "type": "object",
+      "properties": {
+        "plain": {"type": "string"},
+        "date": {"type": "string", "format": "date"},
+        "dateTime": {"type": "string", "format": "date-time"},
+        "password": {"type": "string", "format": "password"},
+        "byte": {"type": "string", "format": "byte"},
+        "binary": {"type": "string", "format": "binary"},
+        "email": {"type": "string", "format": "email"},
+        "uuid": {"type": "string", "format": "uuid"},
+        "uri": {"type": "string", "format": "uri"},
+        "hostname": {"type": "string", "format": "hostname"},
+        "ipv4": {"type": "string", "format": "ipv4"},
+        "ipv6": {"type": "string", "format": "ipv6"},
+        "pattern": {"type": "string", "pattern": "^[A-Z]{2}[0-9]{4}$"},
+        "bounded": {"type": "string", "minLength": 1, "maxLength": 255}
+      }
+    },
+    "NumericTypes": {
+      "type": "object",
+      "properties": {
+        "integer": {"type": "integer"},
+        "int32": {"type": "integer", "format": "int32"},
+        "int64": {"type": "integer", "format": "int64"},
+        "number": {"type": "number"},
+        "float": {"type": "number", "format": "float"},
+        "double": {"type": "number", "format": "double"},
+        "bounded": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "exclusiveMinimum": true,
+          "exclusiveMaximum": true
+        },
+        "multiple": {
+          "type": "integer",
+          "multipleOf": 5
+        }
+      }
+    },
+    "ArrayTypes": {
+      "type": "object",
+      "properties": {
+        "simpleArray": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "boundedArray": {
+          "type": "array",
+          "items": {"type": "integer"},
+          "minItems": 1,
+          "maxItems": 10,
+          "uniqueItems": true
+        },
+        "objectArray": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {"type": "string"},
+              "value": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "ObjectTypes": {
+      "type": "object",
+      "properties": {
+        "simple": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"}
+          }
+        },
+        "withRequired": {
+          "type": "object",
+          "required": ["id", "name"],
+          "properties": {
+            "id": {"type": "integer"},
+            "name": {"type": "string"},
+            "optional": {"type": "string"}
+          }
+        },
+        "boundedProperties": {
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 10,
+          "additionalProperties": {"type": "string"}
+        }
+      }
+    },
+    "EnumTypes": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["pending", "active", "inactive", "deleted"]
+        },
+        "priority": {
+          "type": "integer",
+          "enum": [1, 2, 3, 4, 5]
+        }
+      }
+    },
+    "CompositionTypes": {
+      "allOf": [
+        {"$ref": "#/definitions/BaseObject"},
+        {
+          "type": "object",
+          "properties": {
+            "extra": {"type": "string"}
+          }
+        }
+      ]
+    },
+    "BaseObject": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "integer"},
+        "createdAt": {"type": "string", "format": "date-time"}
+      }
+    },
+    "ReadOnlyExample": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {"type": "string"}
+      }
+    },
+    "WithDefault": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "default": "active"
+        },
+        "count": {
+          "type": "integer",
+          "default": 0
+        }
+      }
+    },
+    "WithXML": {
+      "type": "object",
+      "xml": {
+        "name": "CustomName",
+        "namespace": "http://example.com/ns",
+        "prefix": "ex"
+      },
+      "properties": {
+        "items": {
+          "type": "array",
+          "xml": {
+            "wrapped": true,
+            "name": "itemList"
+          },
+          "items": {
+            "type": "string",
+            "xml": {
+              "name": "item"
+            }
+          }
+        },
+        "attr": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        }
+      }
+    },
+    "WithDiscriminator": {
+      "type": "object",
+      "discriminator": "petType",
+      "required": ["petType"],
+      "properties": {
+        "petType": {"type": "string"},
+        "name": {"type": "string"}
+      }
+    }
+  }
+}

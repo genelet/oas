@@ -1,21 +1,25 @@
 # OAS - OpenAPI Specification Go Packages
 
-Go packages for parsing, manipulating, and validating OpenAPI 3.0 and 3.1 specifications.
+Go packages for parsing, manipulating, and validating OpenAPI/Swagger specifications.
 
 ## Overview
 
-This repository provides two Go packages for working with OpenAPI specifications:
+This repository provides Go packages for working with OpenAPI specifications across all major versions:
 
 | Package | OpenAPI Version | JSON Schema Base |
 |---------|-----------------|------------------|
+| [openapi20](./openapi20/) | 2.0 (Swagger) | JSON Schema Draft 4 subset |
 | [openapi30](./openapi30/) | 3.0.x | JSON Schema Draft 4 |
 | [openapi31](./openapi31/) | 3.1.x | JSON Schema Draft 2020-12 |
 
-Both packages are built directly from the official JSON Schema specifications of their respective OpenAPI versions, ensuring complete and accurate type definitions.
+All packages are built directly from the official JSON Schema specifications of their respective OpenAPI versions, ensuring complete and accurate type definitions.
 
 ## Installation
 
 ```bash
+# Swagger 2.0 (OpenAPI 2.0)
+go get github.com/genelet/oas/openapi20
+
 # OpenAPI 3.0
 go get github.com/genelet/oas/openapi30
 
@@ -25,12 +29,12 @@ go get github.com/genelet/oas/openapi31
 
 ## Features
 
-- Full OpenAPI specification support for both 3.0 and 3.1
+- Full OpenAPI specification support for 2.0, 3.0, and 3.1
 - Zero external dependencies - uses only Go standard library
 - JSON marshaling/unmarshaling with round-trip preservation
 - Boolean schema support (`additionalProperties: true/false`)
 - Extension fields (`x-*`) on all applicable types
-- Comprehensive validation against specifications
+- Comprehensive validation against specifications (3.0, 3.1)
 - Reference (`$ref`) support for all referenceable types
 
 ### OpenAPI 3.1 Specific Features
@@ -41,6 +45,14 @@ go get github.com/genelet/oas/openapi31
 - `mutualTLS` security scheme
 - License `identifier` field (SPDX)
 - `pathItems` in Components
+
+### Swagger 2.0 Specific Features
+
+- `host`, `basePath`, `schemes` for server configuration
+- Body parameters with `in: body`
+- `consumes` and `produces` for content types
+- `securityDefinitions` with basic, apiKey, and oauth2 flows
+- `definitions` for reusable schemas
 
 ## Quick Start
 
@@ -79,6 +91,7 @@ func main() {
 
 ## Documentation
 
+- [Swagger 2.0 Package Documentation](./openapi20/README.md)
 - [OpenAPI 3.0 Package Documentation](./openapi30/README.md)
 - [OpenAPI 3.1 Package Documentation](./openapi31/README.md)
 
@@ -94,6 +107,7 @@ Most of the code in this repository was generated using [Claude Code](https://cl
 
 ## Specification References
 
+- [Swagger 2.0 Specification](https://swagger.io/specification/v2/)
 - [OpenAPI 3.0 Specification](https://spec.openapis.org/oas/v3.0.3)
 - [OpenAPI 3.1 Specification](https://spec.openapis.org/oas/v3.1.0)
 - [JSON Schema Draft 4](https://json-schema.org/specification-links#draft-4)

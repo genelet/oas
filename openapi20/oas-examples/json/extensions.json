@@ -1,0 +1,86 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Extensions Example",
+    "version": "1.0.0",
+    "x-logo": {
+      "url": "https://example.com/logo.png",
+      "altText": "Company Logo"
+    },
+    "x-api-id": "12345"
+  },
+  "host": "api.example.com",
+  "basePath": "/v1",
+  "schemes": ["https"],
+  "x-custom-root": "root-level-extension",
+  "x-teams": ["backend", "frontend"],
+  "paths": {
+    "/items": {
+      "x-path-extension": "path-level",
+      "get": {
+        "summary": "List items",
+        "x-operation-extension": "operation-level",
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl -X GET https://api.example.com/v1/items"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "x-parameter-extension": "param-level"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "x-response-extension": "response-level",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Item"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Item": {
+      "type": "object",
+      "x-schema-extension": "schema-level",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "x-property-extension": "property-level"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "items",
+      "description": "Item operations",
+      "x-tag-extension": "tag-level",
+      "externalDocs": {
+        "url": "https://example.com/docs",
+        "x-docs-extension": "docs-level"
+      }
+    }
+  ],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "X-API-Key",
+      "in": "header",
+      "x-security-extension": "security-level"
+    }
+  }
+}

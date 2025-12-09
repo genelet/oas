@@ -1,0 +1,161 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Parameters Example",
+    "version": "1.0.0"
+  },
+  "host": "api.example.com",
+  "basePath": "/v1",
+  "schemes": ["https"],
+  "paths": {
+    "/items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "Item ID"
+        }
+      ],
+      "get": {
+        "summary": "Get item by ID",
+        "parameters": [
+          {
+            "name": "include",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["details", "history", "metadata"]
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "X-Request-ID",
+            "in": "header",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update item",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated"
+          }
+        }
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Search with validation",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9 ]+$"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "minimum": 1,
+            "default": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string",
+            "enum": ["asc", "desc"],
+            "default": "asc"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results"
+          }
+        }
+      }
+    },
+    "/upload": {
+      "post": {
+        "summary": "File upload",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "type": "file",
+            "required": true
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Uploaded"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "limitParam": {
+      "name": "limit",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 10
+    },
+    "offsetParam": {
+      "name": "offset",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "default": 0
+    }
+  },
+  "definitions": {
+    "Item": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "value": {"type": "number"}
+      }
+    }
+  }
+}

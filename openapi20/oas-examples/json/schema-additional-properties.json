@@ -1,0 +1,54 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Additional Properties Test",
+    "version": "1.0.0"
+  },
+  "host": "api.example.com",
+  "basePath": "/",
+  "paths": {},
+  "definitions": {
+    "Closed": {
+      "type": "object",
+      "description": "No additional properties allowed",
+      "properties": {
+        "name": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "Open": {
+      "type": "object",
+      "description": "Any additional properties allowed",
+      "properties": {
+        "name": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "TypedAdditional": {
+      "type": "object",
+      "description": "Additional properties must be strings",
+      "properties": {
+        "name": {"type": "string"}
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "NestedAdditional": {
+      "type": "object",
+      "description": "Additional properties are objects",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "value": {"type": "integer"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "FreeformMap": {
+      "type": "object",
+      "description": "A map with any values",
+      "additionalProperties": {}
+    }
+  }
+}

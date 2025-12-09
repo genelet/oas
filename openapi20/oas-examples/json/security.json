@@ -1,0 +1,88 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Example",
+    "version": "1.0.0"
+  },
+  "host": "api.example.com",
+  "basePath": "/v1",
+  "schemes": ["https"],
+  "paths": {
+    "/protected": {
+      "get": {
+        "summary": "A protected endpoint",
+        "security": [
+          {"api_key": []},
+          {"oauth2": ["read:data"]}
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/admin": {
+      "get": {
+        "summary": "Admin only endpoint",
+        "security": [
+          {"basic_auth": []}
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "X-API-Key",
+      "in": "header",
+      "description": "API key authentication"
+    },
+    "basic_auth": {
+      "type": "basic",
+      "description": "Basic HTTP authentication"
+    },
+    "oauth2": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://example.com/oauth/authorize",
+      "tokenUrl": "https://example.com/oauth/token",
+      "scopes": {
+        "read:data": "Read data",
+        "write:data": "Write data"
+      }
+    },
+    "oauth2_implicit": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://example.com/oauth/authorize",
+      "scopes": {
+        "read:data": "Read data"
+      }
+    },
+    "oauth2_password": {
+      "type": "oauth2",
+      "flow": "password",
+      "tokenUrl": "https://example.com/oauth/token",
+      "scopes": {
+        "read:data": "Read data"
+      }
+    },
+    "oauth2_application": {
+      "type": "oauth2",
+      "flow": "application",
+      "tokenUrl": "https://example.com/oauth/token",
+      "scopes": {
+        "admin": "Admin access"
+      }
+    }
+  },
+  "security": [
+    {"api_key": []}
+  ]
+}

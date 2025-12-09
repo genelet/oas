@@ -1,0 +1,59 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Tags Example",
+    "version": "1.0.0"
+  },
+  "host": "api.example.com",
+  "basePath": "/v1",
+  "schemes": ["https"],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["users", "public"],
+        "summary": "List users",
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "post": {
+        "tags": ["users", "admin"],
+        "summary": "Create user",
+        "responses": {
+          "201": {"description": "Created"}
+        }
+      }
+    },
+    "/items": {
+      "get": {
+        "tags": ["items"],
+        "summary": "List items",
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "users",
+      "description": "User management operations",
+      "externalDocs": {
+        "description": "User API documentation",
+        "url": "https://example.com/docs/users"
+      }
+    },
+    {
+      "name": "items",
+      "description": "Item operations"
+    },
+    {
+      "name": "public",
+      "description": "Public endpoints"
+    },
+    {
+      "name": "admin",
+      "description": "Admin-only endpoints"
+    }
+  ]
+}
