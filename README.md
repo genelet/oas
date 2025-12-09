@@ -2,6 +2,8 @@
 
 Go packages for parsing, manipulating, and validating OpenAPI/Swagger specifications.
 
+[![GoDoc](https://godoc.org/github.com/genelet/oas?status.svg)](https://godoc.org/github.com/genelet/oas)
+
 ## Overview
 
 This repository provides Go packages for working with OpenAPI specifications across all major versions:
