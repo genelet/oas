@@ -13,6 +13,7 @@ This repository provides Go packages for working with OpenAPI specifications acr
 | [openapi20](./openapi20/) | 2.0 (Swagger) | JSON Schema Draft 4 subset |
 | [openapi30](./openapi30/) | 3.0.x | JSON Schema Draft 4 |
 | [openapi31](./openapi31/) | 3.1.x | JSON Schema Draft 2020-12 |
+| [unified](./unified/) | All | Unified Interface Adapter |
 
 All packages are built directly from the official JSON Schema specifications of their respective OpenAPI versions, ensuring complete and accurate type definitions.
 
